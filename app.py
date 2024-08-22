@@ -1,11 +1,29 @@
 from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+# database connection and integration
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
+db = SQLAlchemy(app)
+
+
+class Student(db.Model):
+    id = db.Column(db.Integer(), primary_key = True)
+    student_name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(100),nullable = False )
+    contact = db.Column(db.Integer())
+
+
+with app.app_context():
+    db.create_all()
 
 
 # @app.route("/")
 # def httpResponse():
 #     return "<h1>this is flask first sssion</h1>"
+
+
 
 @app.route("/json/")
 def json():
@@ -41,6 +59,23 @@ def mainFun():
 
     return render_template("main.html")
 
+
+# crud application from here...
+
+@app.route("/create-student/", methods = [ 'GET', 'POST' ])
+def createStudent():
+    if request.method == 'POST':
+        student_name = request.form.get("student_name")
+        email = request.form.get("email")
+        contact = request.form.get("contact")
+
+        return f'{student_name}, {email}, {contact}'
+
+    return render_template("crud/create-student.html")
+
+
+# CreateStudent -- classname
+# createStudent -- fun name
 
 
 if __name__ == "__main__" :

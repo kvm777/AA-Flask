@@ -20,9 +20,14 @@
         <p>{{userdata.marks}}</p>
         <p>{{val}}</p>
 
+        <a href="{{ url_for( 'createStudent' ) }}">go to create studdent form</a>
+
+        <!-- we have to define the function name .... not the url path -->
         <a class="btn btn-outline-success" href="{{ url_for( 'mainFun' ) }}">go to main page</a>
 
-        <h1>{{customername}}</h1>
+        {% if customername %}
+            <h1>{{customername}}</h1> 
+        {% endif %}
         
     {% endblock %}
 
