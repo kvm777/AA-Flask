@@ -20,7 +20,9 @@
         <p>{{userdata.marks}}</p>
         <p>{{val}}</p>
 
-        <a href="{{ url_for( 'createStudent' ) }}">go to create studdent form</a>
+        <a class="btn btn-warning mb-3" href="{{ url_for( 'createStudent' ) }}">go to create studdent form</a>
+
+        <br>
 
         <!-- we have to define the function name .... not the url path -->
         <a class="btn btn-outline-success" href="{{ url_for( 'mainFun' ) }}">go to main page</a>

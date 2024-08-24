@@ -69,9 +69,22 @@ def createStudent():
         email = request.form.get("email")
         contact = request.form.get("contact")
 
-        return f'{student_name}, {email}, {contact}'
+        student = Student(student_name = student_name, email = email, contact = contact)
+        db.session.add(student)
+        db.session.commit()
+
+
+        return redirect(url_for("studentsData"))
 
     return render_template("crud/create-student.html")
+
+
+
+@app.route("/students-data/")
+def studentsData():
+    students = Student.query.all()
+
+    return render_template("crud/students-data.html", students = students)
 
 
 # CreateStudent -- classname
