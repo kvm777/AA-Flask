@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block head %}
+        <title>delete-student page</title>
+{% endblock %}
+    
+
+{% block content %}
+
+<h1>are you sure to delete the student {{student.student_name}}</h1>
+
+<a class="btn btn-primary rounded-0 m-1" href="{{ url_for( 'studentsData' ) }}">go back</a>
+
+
+<form class="" method="post">
+    <button type="submit" class="btn btn-outline-danger m-1">delete</button>
+</form>
+
+
+{% endblock %}
+
+

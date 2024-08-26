@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block head %}
+        <title>update-student page</title>
+{% endblock %}
+    
+
+{% block content %}
+
+<h1>this is update form</h1>
+
+<form class="container card m-3 mx-auto p-3 shadow col-8" method="post">
+    <div class="mb-3">
+        <label for="student" class="form-label">Student Name</label>
+        <input type="text" name="updated_name" class="form-control" id="student" value="{{student.student_name}}">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" name="email" class="form-control" id="email" value="{{student.email}}" >
+    </div>
+    <div class="mb-3">
+      <label for="contact" class="form-label">Contact Number</label>
+      <input type="number" name="contact" class="form-control" id="contact" value="{{student.contact}}" >
+    </div>
+
+    <button type="submit" class="btn btn-primary">update</button>
+</form>
+
+
+<a href="{{ url_for( 'studentsData' ) }}">go to students data</a>
+
+
+{% endblock %}

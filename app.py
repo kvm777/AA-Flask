@@ -87,10 +87,52 @@ def studentsData():
     return render_template("crud/students-data.html", students = students)
 
 
-# CreateStudent -- classname
-# createStudent -- fun name
+# @app.route("/delete-student/<int:id>/")
+# def deleteStudent(id):
+#     student = Student.query.get(id)
+    
+#     db.session.delete(student)
+#     db.session.commit()
+
+
+#     return redirect(url_for("studentsData"))
+
+
+@app.route("/delete-student/<int:id>/", methods = ['GET', 'POST'])
+def deleteStudent(id):
+    student = Student.query.get(id)
+
+    if request.method == 'POST':
+        db.session.delete(student)
+        db.session.commit()
+
+        return redirect(url_for( "studentsData" ))
+
+    return render_template("crud/delete-student.html", student = student)
+
+
+
+
+@app.route("/update-student/<int:id>/", methods = ['GET', 'POST'])
+def updateStudent(id):
+    student = Student.query.get(id)
+
+    if request.method == 'POST':
+        student.student_name = request.form.get("updated_name")
+        student.email = request.form.get("email")
+        student.contact = request.form.get("contact")
+
+        db.session.commit()
+
+        return redirect(url_for( 'studentsData' ))
+
+    return render_template("crud/update-student.html", student = student)
 
 
 if __name__ == "__main__" :
     app.run(debug=True, port=2000)
 
+
+
+# CreateStudent -- classname
+# createStudent -- fun name
